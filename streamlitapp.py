@@ -1,6 +1,17 @@
 """Streamlit UI for Agentic RAG System - Deep Tech Dark Version"""
 
+import os
 import streamlit as st
+
+# --- ENVIRONMENT HIJACK FOR STREAMLIT CLOUD ---
+# Force secrets into the OS environment immediately so modular files can find them
+try:
+    if "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+except Exception:
+    pass # This fails silently on your local machine, but works perfectly in the cloud
+
+# --- YOUR EXISTING IMPORTS & CODE START HERE ---
 from pathlib import Path
 import sys
 import time
